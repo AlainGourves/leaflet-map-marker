@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte Leaflet - Administration</title>
+    <link rel="stylesheet" href="./css/vendor/leaflet.css"/>
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body>
+<main>
+    <section id="carteSalles">
+        <div id="mapSalles"></div>
+    </section>
+
+    <section id="listeSalles">
+    <?php if(isset($listeSalles)) echo $listeSalles; ?>
+    </section>
+
+    <section id="ajoutSalles">
+        <h2><?= (isset($modif)) ? "Modifier la salle" : "Ajouter une nouvelle salle" ?></h2>
+        <div id="mapAjout"></div>
+        <form action="list.php" method="POST">
+            <label for="nomSalle"><?php if(isset($message['nomSalle'])) echo alerte($message['nomSalle']); ?>
+                <input type="text" name="nomSalle" id="nomSalle" placeholder="Nom de la salle"<?php if(isset($modif)) echo " value=\"". $modif['nomSalle']. "\""; ?>>
+            </label>
+            <label for="adresseSalle"><?php if(isset($message['adresseSalle'])) echo alerte($message['adresseSalle']); ?>
+                <input type="text" name="adresseSalle" id="adresseSalle" placeholder="Adresse de la salle"<?php if(isset($modif)) echo " value=\"". $modif['adresseSalle']. "\""; ?>>
+            </label>
+            <label for="posSalle"><?php if(isset($message['posSalle'])) echo alerte($message['posSalle']); ?>
+                <input type="text" name="posSalle" id="posSalle" readonly data-lat="" data-lng="" placeholder="Coordonnées de la salle"<?php if(isset($modif)) echo " value=\"". $modif['posSalle'][1]. ",". $modif['posSalle'][0]. "\""; ?>>
+            </label>
+            <label for="sportsSalle"><?php if(isset($message['sportsSalle'])) echo alerte($message['sportsSalle']); ?>
+                <textarea name="sportsSalle" id="sportsSalle" placeholder="Un sport par ligne, ou séparés par des virgules"><?php if(isset($modif)) echo $modif['sportsSalle']; ?></textarea>
+            </label>
+<?php
+if (isset($modif)) :
+?>
+            <input type="hidden" name="idSalle" value="<?= $modif['idSalle'] ?>">
+<?php
+endif;
+?>
+            <input type="submit" name="submit" value="Enregistrer la salle">
+        </form>
+    </section>
+
+
+    <div class="overlay">
+        <div id="dialogueSalle">
+            <h3>Voulez-vous vraiment supprimer les informations<br>sur "<span><?php ?></span>" ?</h3>
+            <div>
+                <button id="ouiSalle" class="btn">Oui</button>
+                <button id="nonSalle" class="btn">Non</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<?php
+if (isset($modif)) :
+?>
+<script>
+    let markerOldPos = [<?= $modif['posSalle'][1] ?>,<?= $modif['posSalle'][0] ?>];
+</script>
+<?php
+endif;
+?>
+<script src="./js/vendor/leaflet.js" defer></script>
+<script src="./js/app.js" defer></script>
+</body>
+</html>
