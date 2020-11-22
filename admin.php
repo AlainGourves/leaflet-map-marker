@@ -12,7 +12,7 @@ function sanitizeString($var) {
 }
 
 function alerte($message){
-    return "<span class=\"alerte\">". $message. "<span>";
+    return "<span class=\"alerte\">". $message. "</span>";
 }
 
 function saveGeoJson($url, $json){
@@ -27,10 +27,10 @@ if (isset($_POST['submit'])) {
         $message['nomSalle'] = "Saisir un nom.";
     } elseif (empty($_POST['adresseSalle'])) {
         $message['adresseSalle'] = "Saisir une adresse.";
+    } elseif (strlen(trim($_POST['sportsSalle'])) == 0) {
+        $message['sportsSalle'] = "Saisir le(s) sport(s) pratiqué(s).";
     } elseif (empty($_POST['posSalle'])) {
         $message['posSalle'] = "Placer un marqueur sur la carte.";
-    } elseif (!strlen(trim($_POST['sportsSalle']))) {
-        $message['sportsSalle'] = "Saisir le(s) sport(s) pratiqué(s).";
     }else{
         $feature = new stdClass; // objet anonyme
         $properties = new stdClass; // objet anonyme
@@ -106,7 +106,7 @@ foreach ($json->features as $feature) {
     $listeSalles .= "<a href=\"?action=modifier&amp;name=". urlencode($feature->properties->name). "&amp;id=". $i. "\" data-name=\"". $feature->properties->name. "\" class=\"btn\">Modif.</a>\n";
     $listeSalles .= "<a href=\"?action=supprimer&amp;name=". urlencode($feature->properties->name). "&amp;id=". $i. "\" data-name=\"". $feature->properties->name. "\" class=\"btn\">Suppr.</a>\n";
     $listeSalles .= "</header>\n";
-    $listeSalles .= "<h1>". $feature->properties->name. "</h1>\n";
+    $listeSalles .= "<h2>". $feature->properties->name. "</h2>\n";
     $listeSalles .= "<p>". $feature->properties->address. "</p>\n";
     $listeSalles .= "<p>";
     foreach ($feature->properties->sports as $sport){

@@ -1,82 +1,123 @@
+#carteSalles {
+    order: 1;
+}
+
+#carteSalles,
+#mapSalles{
+    width: 100%;
+    height: 33vh;
+}
 
 #listeSalles,
 #ajoutSalles{
-    width: 50%;
-    max-width: 500px;
-    padding: 1em;
-    margin-top: 1em;
+    width: 100%;
+    margin: 1em;
+    // margin-top: 1em;
 }
 
 #listeSalles{
-    margin-left: auto;
+    order: 3;
+    // margin-left: auto;
 }
 
 #ajoutSalles{
-    margin: 2em auto 0 0;
+    order: 2;
+    padding: 1em;
+    // margin: 2em auto 0 0;
     background: hsl(30, 70%, 90%);
-    border: 2px solid hsl(30, 40%, 60%);
-    border-radius: 1em;
-}
-
-
-#mapAjout .legende{
-    padding: .6em;
-    border-radius: 8px;
-    background-color: white;
-    box-shadow: 2px 2px 6px var(--shadow-25);
+    border: 1px solid hsl(30, 40%, 60%);
+    border-radius: .5em;
 }
 
 /* ---------------------------------------- FORM */
-#ajoutSalles form input[type=text],
-#ajoutSalles form textarea{
-    width: 30em;
-    margin-bottom: 1em;
+input:placeholder-shown,
+textarea:placeholder-shown{
+    background-color: var(--shadow-25);
 }
 
+#ajoutSalles input[type=text],
+#ajoutSalles textarea{
+    width: 100%;
+    margin-bottom: 1em;
+    font-size: .75em;
+    border: 1px solid rgba(0,0,0,.5);
+    border-radius: .5em;
+    padding: .25em .5em;
+}
 
+#ajoutSalles textarea{
+    resize: vertical;
+    overflow: auto;
+}
+
+#ajoutSalles input[type=submit]{
+    margin-left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--bleu);
+    border: 1px solid var(--bleu);
+}
+
+span.alerte{
+    color: var(--orange);
+    font-weight: 600;
+}
+
+#ajoutSalles input.alerte,
+#ajoutSalles textarea.alerte{
+    box-shadow: 0 0 2px 2px var(--orange);
+}
 
 #listeSalles {
     article{
-        padding: 1em;
+        // padding: 1em;
         margin-bottom: 1em;
-        background: hsl(209, 70%, 90%);
-        border: 2px solid hsl(209, 40%, 60%);
-        border-radius: 1em;
+        background: var(--bleuLight);
+        border: 1px solid var(--bleu);
+        border-radius: .5em;
     }
 
     header{
         text-align: right;
+        padding: .5em;
+        border-bottom: 1px solid hsla(0, 0%, 100%, 0.5);
 
         a{
             text-decoration: none;
-            background-color: hsl(209, 40%, 30%);
+            background-color: var(--bleu);
+
+            &:not(:first-of-type){
+                margin-left: .8em;
+            }
+        }
+
+        & ~ * {
+            margin: .5rem 1rem;
         }
     }
     
-    
+    p:first-of-type{
+        font-style: oblique;
+    }
+
     span{
         background-color: var(--vert);
         text-transform: capitalize;
-    }
-    
-    span:not(:first-of-type),
-    header a:not(:first-of-type){
-        margin-left: .8em;
+        margin-right: .8em;
     }
 }
 
 
 #ajoutSalles #mapAjout {
-    width: calc(100% - 1em);
+    width: 100%;
     height: 250px;
 }
 
-/* ------------------- Diaogue Confirmation */
+/* ------------------- Dialogue Confirmation */
 .overlay{
     display: none;
     position: absolute;
     top: 0; left: 0; bottom: 0; right: 0;
-    z-index: 1000;
+    z-index: 2000;
     background-color: var(--shadow-85);
 }
 
@@ -95,6 +136,7 @@
     
     .btn{
         margin-top: 1em;
+        text-transform: uppercase;
         background-color: var(--bleu);
         border: 1px solid var(--bleu);
     }

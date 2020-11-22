@@ -1,0 +1,16 @@
+/* -------------------- Medium devices (tablets, 768px and up) -------------------- */
+@media (min-width: 768px) {
+    #listeSalles,
+    #ajoutSalles{
+        width: calc(50% - 2em);
+        max-width: 500px;
+    }
+
+    #listeSalles{
+        order: 2;
+    }
+
+    #ajoutSalles{
+        order: 3;
+    }
+}

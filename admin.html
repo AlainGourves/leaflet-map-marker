@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./css/vendor/leaflet.css"/>
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/admin.css">
+    <link rel="stylesheet" href="./css/responsive.css">
 </head>
 <body>
 <main>
@@ -15,25 +16,49 @@
     </section>
 
     <section id="listeSalles">
+        <h1>Liste des salles</h1>
     <?php if(isset($listeSalles)) echo $listeSalles; ?>
     </section>
 
     <section id="ajoutSalles">
-        <h2><?= (isset($modif)) ? "Modifier la salle" : "Ajouter une nouvelle salle" ?></h2>
+        <h1><?= (isset($modif)) ? "Modifier la salle" : "Ajouter une nouvelle salle" ?></h1>
+        <?php if(isset($message['posSalle'])) echo alerte($message['posSalle']); ?>
         <div id="mapAjout"></div>
-        <form action="list.php" method="POST">
+        <p>Cliquez sur la carte pour placer un marqueur, vous pouvez ensuite le déplacer à volonté.</p>
+        <form action="admin.php" method="POST">
             <label for="nomSalle"><?php if(isset($message['nomSalle'])) echo alerte($message['nomSalle']); ?>
-                <input type="text" name="nomSalle" id="nomSalle" placeholder="Nom de la salle"<?php if(isset($modif)) echo " value=\"". $modif['nomSalle']. "\""; ?>>
+                <input type="text" name="nomSalle" id="nomSalle" placeholder="Nom de la salle"<?php if(isset($modif)) {
+                    echo " value=\"". $modif['nomSalle']. "\"";
+                }else if (isset($_POST['nomSalle'])) {
+                    echo " value=\"". $_POST['nomSalle']. "\"";
+                }
+                if(isset($message['nomSalle'])){
+                    echo " class=\"alerte\"";
+                } ?>>
             </label>
             <label for="adresseSalle"><?php if(isset($message['adresseSalle'])) echo alerte($message['adresseSalle']); ?>
-                <input type="text" name="adresseSalle" id="adresseSalle" placeholder="Adresse de la salle"<?php if(isset($modif)) echo " value=\"". $modif['adresseSalle']. "\""; ?>>
-            </label>
-            <label for="posSalle"><?php if(isset($message['posSalle'])) echo alerte($message['posSalle']); ?>
-                <input type="text" name="posSalle" id="posSalle" readonly data-lat="" data-lng="" placeholder="Coordonnées de la salle"<?php if(isset($modif)) echo " value=\"". $modif['posSalle'][1]. ",". $modif['posSalle'][0]. "\""; ?>>
+                <input type="text" name="adresseSalle" id="adresseSalle" placeholder="Adresse de la salle"<?php if(isset($modif)) {
+                    echo " value=\"". $modif['adresseSalle']. "\"";
+                }else if (isset($_POST['adresseSalle'])) {
+                    echo " value=\"". $_POST['adresseSalle']. "\"";
+                }
+                if(isset($message['adresseSalle'])){
+                    echo " class=\"alerte\"";
+                } ?>>
             </label>
             <label for="sportsSalle"><?php if(isset($message['sportsSalle'])) echo alerte($message['sportsSalle']); ?>
-                <textarea name="sportsSalle" id="sportsSalle" placeholder="Un sport par ligne, ou séparés par des virgules"><?php if(isset($modif)) echo $modif['sportsSalle']; ?></textarea>
-            </label>
+            <textarea name="sportsSalle" id="sportsSalle" placeholder="Un sport par ligne, ou séparés par des virgules"><?php if(isset($modif)) {
+                echo $modif['sportsSalle'];
+            }else if (isset($_POST['sportsSalle']) && strlen(trim($_POST['sportsSalle']))>0) {
+                echo $_POST['sportsSalle'];
+            }
+            if(isset($message['sportsSalle'])){
+                echo " class=\"alerte\"";
+            } ?></textarea>
+        </label>
+        <label for="posSalle">
+            <input type="text" name="posSalle" id="posSalle" readonly data-lat="" data-lng="" placeholder="Coordonnées de la salle"<?php if(isset($modif)) echo " value=\"". $modif['posSalle'][1]. ",". $modif['posSalle'][0]. "\""; ?>>
+        </label>
 <?php
 if (isset($modif)) :
 ?>
@@ -41,7 +66,7 @@ if (isset($modif)) :
 <?php
 endif;
 ?>
-            <input type="submit" name="submit" value="Enregistrer la salle">
+            <input type="submit" name="submit" class="btn" value="Enregistrer la salle">
         </form>
     </section>
 

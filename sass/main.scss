@@ -61,19 +61,28 @@ select {
 
 /* -----------------------------------------------------------------------Global  */
 :root {
-    --hautCarte: 400px;
+    --mapHeight: 400px;
     --vert: hsl(160, 85%, 40%);
     --bleu: hsl(210, 90%, 40%);
+    --bleuLight: hsl(210, 90%, 87%);
+    --orange: hsl(22, 85%, 50%);
 
     --shadow-85: rgba(0, 0, 0, .85);
     --shadow-50: rgba(0, 0, 0, .50);
     --shadow-25: rgba(0, 0, 0, .25);
 }
 
+body{
+    font-family: "Work Sans", sans-serif;
+    font-weight: 300;
+    color: var(--shadow-85);
+}
+
 main {
     position: relative;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     align-items: flex-start;
 }
 
@@ -81,29 +90,48 @@ label {
     display: block;
 }
 
-#carteSalles {
-    width: 100%;
+input:focus,
+textarea:focus{
+    outline: none;
+    box-shadow: 0 0 2px 2px hsla(204deg, 100%, 50%, .75);
 }
 
 #mapSalles {
     width: 100%;
-    height: var(--hautCarte);
+    height: var(--mapHeight);
 }
 
 .btn {
     display: inline-block;
-    padding: 6px 8px;
+    padding: 4px 6px;
     color: #fff;
     font-size: .8em;
-    font-weight: 700;
+    // font-weight: 700;
     border-radius: 4px;
-    cursor: pointer;
+    transition: transform .25s ease-in-out;
 }
+
+a.btn,
+input.btn,
+button.btn {
+    cursor: pointer;
+
+    &:active{
+        transform: scale(0.95);
+    }
+}
+
 
 /* -------------------------------------- Popups */
 .leaflet-popup-content {
+    max-width: 16vw;
+
     h4 {
         text-transform: uppercase;
+    }
+
+    p{
+        margin: 1em 0;
     }
 
     p:first-of-type {
@@ -113,14 +141,13 @@ label {
 
     span {
         text-transform: capitalize;
-        line-height: 1.4;
-        font-weight: 700;
-        color: #fff;
-        ;
         background-color: var(--vert);
+        margin: .4em .8em .4em 0;
     }
+}
 
-    span:not(:first-of-type) {
-        margin-left: .8em;
-    }
+/* -------------------------------------- Divers */
+
+#pageContent{
+    padding: 1em;
 }

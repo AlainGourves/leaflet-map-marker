@@ -100,14 +100,6 @@ window.addEventListener("load", e => {
     myMap = L.map("mapAjout");
     L.tileLayer(tileUrl, { attribution }).addTo(myMap);
 
-    let legend = L.control({position: 'topright'});
-    legend.onAdd = function (map) {
-        let div = L.DomUtil.create('div', 'legende');
-        div.innerHTML = `<h4>Cliquez sur la carte pour placer un marqueur</h4>
-                    <p>Vous pouvez ensuite le déplacer à volonté</p>`;
-        return div;
-    };
-    legend.addTo(myMap);
     marker = L.marker([0,0], { draggable: true}).addTo(myMap);
 
     myMap.on('load', onMapLoad);
