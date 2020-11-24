@@ -18,7 +18,7 @@ const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
 
 // fonctions pour la carte des salles
-function InfoSalle(layer) {
+function infoSalle(layer) {
     let props = layer.feature.properties;
     let content = '<h4>'+ props.name +'</h4>';
     content += '<p>' + props.address + '</p>'
@@ -32,7 +32,7 @@ function InfoSalle(layer) {
 
 function onEachFeature(feature, layer) {
     layer.addTo(markerArray);
-    InfoSalle(layer);
+    infoSalle(layer);
 }
 
 // fonctions pour l'ajout de salles
