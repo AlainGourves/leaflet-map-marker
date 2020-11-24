@@ -85,7 +85,7 @@ window.addEventListener("load", e => {
         L.geoJson(data, {
             onEachFeature: onEachFeature
         }).addTo(mapSalles);
-        mapSalles.fitBounds(markerArray.getBounds());
+        mapSalles.fitBounds(markerArray.getBounds(), { padding: [10,10]});
     }
 
     mapSalles = L.map("mapSalles").setView([48.087, -1.66], 18);
