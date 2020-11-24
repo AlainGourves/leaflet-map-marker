@@ -96,6 +96,7 @@ label {
     // cf. https://css-tricks.com/the-focus-visible-trick/ 
     &:not(:focus-visible) {
         outline: none;
+        outline-style: none;
     }
 }
 
