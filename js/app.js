@@ -18,8 +18,7 @@ const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
 
 // fonctions pour la carte des salles
-function displayInfoSalle(e) {
-    let layer = e.target;
+function InfoSalle(layer) {
     let props = layer.feature.properties;
     let content = '<h4>'+ props.name +'</h4>';
     content += '<p>' + props.address + '</p>'
@@ -32,8 +31,8 @@ function displayInfoSalle(e) {
 }
 
 function onEachFeature(feature, layer) {
-    // markerArray.addLayer(layer);
     layer.addTo(markerArray);
+    InfoSalle(layer);
     layer.on({
         click: displayInfoSalle
     });
