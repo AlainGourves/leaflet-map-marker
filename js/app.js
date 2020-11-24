@@ -30,9 +30,16 @@ function infoSalle(layer) {
     layer.bindPopup(content, {closeButton: false});
 }
 
+function displayPop(){
+    this.openPopup();
+}
+
 function onEachFeature(feature, layer) {
     layer.addTo(markerArray);
     infoSalle(layer);
+    layer.on({
+        click: displayPop
+    });
 }
 
 // fonctions pour l'ajout de salles
@@ -100,7 +107,7 @@ window.addEventListener("load", e => {
     myMap = L.map("mapAjout");
     L.tileLayer(tileUrl, { attribution }).addTo(myMap);
 
-    marker = L.marker([0,0], { draggable: true}).addTo(myMap);
+    marker = L.marker([0,0], { draggable: true, title: "Cliquer-glisser pour déplacer le marqueur."}).addTo(myMap);
 
     myMap.on('load', onMapLoad);
     myMap.setView([48.087, -1.66], 15);
