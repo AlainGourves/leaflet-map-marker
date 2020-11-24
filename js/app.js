@@ -11,7 +11,7 @@ const dialogueNon = document.querySelector('#nonSalle');
 
 const url = "js/salles.json";
 
-let mapSalles, myMap, marker;
+let mapSalles, myMap, marker, markerArray;
 
 const attribution = "fond de carte par&nbsp;<a href=\"http://www.openstreetmap.fr/mentions-legales/\" target=\"_blank\" rel=\"nofollow noopener\" data-saferedirecturl=\"https://www.google.com/url?q=http://www.openstreetmap.fr/mentions-legales/&amp;source=gmail&amp;ust=1549536187967000&amp;usg=AFQjCNFnpX0mkyom6on-dpH6CUoxPBmVvQ\">OpenStreetMap France</a>, sous&nbsp;<a href=\"http://creativecommons.org/licenses/by-sa/2.0/fr/\" target=\"_blank\" rel=\"nofollow noopener\" data-saferedirecturl=\"https://www.google.com/url?q=http://creativecommons.org/licenses/by-sa/2.0/fr/&amp;source=gmail&amp;ust=1549536187967000&amp;usg=AFQjCNGylyk2k1uD6Cjh4C5kjLYM9ADqdw\">licence CC BY-SA</a>&nbsp;»";
 const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
@@ -32,6 +32,8 @@ function displayInfoSalle(e) {
 }
 
 function onEachFeature(feature, layer) {
+    // markerArray.addLayer(layer);
+    layer.addTo(markerArray);
     layer.on({
         click: displayInfoSalle
     });
@@ -83,9 +85,10 @@ window.addEventListener("load", e => {
         L.geoJson(data, {
             onEachFeature: onEachFeature
         }).addTo(mapSalles);
+        mapSalles.fitBounds(markerArray.getBounds());
     }
 
-    mapSalles = L.map("mapSalles").setView([48.087, -1.66], 15);
+    mapSalles = L.map("mapSalles").setView([48.087, -1.66], 18);
 
     L.tileLayer(tileUrl, { attribution }).addTo(mapSalles);
     const scale = L.control.scale({
@@ -93,6 +96,7 @@ window.addEventListener("load", e => {
         imperial: false
     })
     scale.addTo(mapSalles);
+    markerArray = new L.featureGroup();
 
     getData(url);
 

@@ -87,10 +87,11 @@ label {
   display: block;
 }
 
-input:focus,
-textarea:focus {
-  outline: none;
+:focus {
   box-shadow: 0 0 2px 2px rgba(0, 153, 255, 0.75);
+}
+:focus:not(:focus-visible) {
+  outline: none;
 }
 
 #mapSalles {
@@ -120,7 +121,7 @@ button.btn:active {
 
 /* -------------------------------------- Popups */
 .leaflet-popup-content {
-  max-width: 16vw;
+  max-width: 200px;
 }
 .leaflet-popup-content h4 {
   text-transform: uppercase;

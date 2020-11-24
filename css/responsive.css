@@ -13,4 +13,8 @@
   #ajoutSalles {
     order: 3;
   }
+
+  #dialogueSalle .btn {
+    padding: 4px 6px;
+  }
 }

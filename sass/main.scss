@@ -90,10 +90,13 @@ label {
     display: block;
 }
 
-input:focus,
-textarea:focus{
-    outline: none;
+:focus{
     box-shadow: 0 0 2px 2px hsla(204deg, 100%, 50%, .75);
+
+    // cf. https://css-tricks.com/the-focus-visible-trick/ 
+    &:not(:focus-visible) {
+        outline: none;
+    }
 }
 
 #mapSalles {
@@ -124,7 +127,7 @@ button.btn {
 
 /* -------------------------------------- Popups */
 .leaflet-popup-content {
-    max-width: 16vw;
+    max-width: 200px;
 
     h4 {
         text-transform: uppercase;
