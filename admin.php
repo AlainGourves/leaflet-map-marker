@@ -63,6 +63,7 @@ if (isset($_POST['submit'])) {
         }
 
         saveGeoJson($url, $json);
+        unset($_POST); // pour ne pas réafficher les infos dans le formulaire après enregistrement
     }
 }
 
@@ -103,16 +104,16 @@ $i = 0;
 foreach ($json->features as $feature) {
     $listeSalles .= "<article class=\"salle\">\n";
     $listeSalles .= "<header>\n";
-    $listeSalles .= "<a href=\"?action=modifier&amp;name=". urlencode($feature->properties->name). "&amp;id=". $i. "\" data-name=\"". $feature->properties->name. "\" class=\"btn\">Modif.</a>\n";
+    $listeSalles .= "<a href=\"?action=modifier&amp;name=". urlencode($feature->properties->name). "&amp;id=". $i. "#ajoutSalles\" data-name=\"". $feature->properties->name. "\" class=\"btn\">Modif.</a>\n";
     $listeSalles .= "<a href=\"?action=supprimer&amp;name=". urlencode($feature->properties->name). "&amp;id=". $i. "\" data-name=\"". $feature->properties->name. "\" class=\"btn\">Suppr.</a>\n";
     $listeSalles .= "</header>\n";
     $listeSalles .= "<h2>". $feature->properties->name. "</h2>\n";
     $listeSalles .= "<p>". $feature->properties->address. "</p>\n";
-    $listeSalles .= "<p>";
+    $listeSalles .= "<ul>";
     foreach ($feature->properties->sports as $sport){
-        $listeSalles .= "<span class=\"btn\">". $sport. "</span>";
+        $listeSalles .= "<li class=\"btn\">". $sport. "</li>";
     }
-    $listeSalles .= "</p>\n";
+    $listeSalles .= "</ul>\n";
     $listeSalles .= "</article>\n";
     $i++;
 }

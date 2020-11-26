@@ -22,23 +22,21 @@ function infoSalle(layer) {
     let props = layer.feature.properties;
     let content = '<h4>'+ props.name +'</h4>';
     content += '<p>' + props.address + '</p>'
-    content += '<p>';
+    content += '<ul>';
     props.sports.forEach(e => {
-        content += '<span class="btn">' + e + '</span>'
+        content += '<li class="btn">' + e + '</li>'
     });
-    content += '</p>';
+    content += '</ul>';
     layer.bindPopup(content, {closeButton: false});
-}
-
-function displayPop(){
-    this.openPopup();
 }
 
 function onEachFeature(feature, layer) {
     layer.addTo(markerArray);
     infoSalle(layer);
     layer.on({
-        click: displayPop
+        click: function(){
+            this.openPopup();
+        }
     });
 }
 
@@ -52,6 +50,7 @@ function onMapLoad(){
     if(typeof markerOldPos !== 'undefined'){
         // cas d'une modif
         marker.setLatLng(markerOldPos);
+        position(L.latLng(markerOldPos));
         zoomTo(myMap, markerOldPos);
     }
 }
@@ -60,7 +59,6 @@ function position(pos){
     posSalle.value = pos.lat + ', ' + pos.lng;
     posSalle.dataset.lat = pos.lat;
     posSalle.dataset.lng = pos.lng;
-    getAddress(pos);
 }
 
 async function getAddress(pos){
@@ -117,11 +115,13 @@ window.addEventListener("load", e => {
         marker.setLatLng(pos);
         zoomTo(this, pos);
         position(pos);
+        getAddress(pos);
     });
 
     L.DomEvent.on(marker, 'dragend', () => {
         pos = marker.getLatLng();
         position(pos);
+        getAddress(pos);
     });
 
     // Btns "modif"

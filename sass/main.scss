@@ -29,6 +29,15 @@ body {
 /* A elements that don't have a class get default styles */
 a:not([class]) {
     text-decoration-skip-ink: auto;
+    color: inherit;
+
+    &:hover,
+    &:focus{
+        text-decoration: none;
+        color: #fff;
+        background-color: var(--bleu);
+        box-shadow: 0 0 0 2px var(--bleu);
+    }
 }
 
 /* Make images easier to work with */
@@ -90,14 +99,17 @@ label {
     display: block;
 }
 
-:focus{
+input:focus-visible{
     box-shadow: 0 0 2px 2px hsla(204deg, 100%, 50%, .75);
-
-    // cf. https://css-tricks.com/the-focus-visible-trick/ 
-    &:not(:focus-visible) {
-        outline: none;
-        outline-style: none;
-    }
+    outline-style: none;
+    outline: none;
+}
+// cf. https://css-tricks.com/the-focus-visible-trick/ 
+input:focus:not(:focus-visible) {
+    box-shadow: 0 0 2px 2px var(--vert);
+    outline-style: none;
+    outline: none;
+    // box-shadow: none;
 }
 
 #mapSalles {
@@ -138,12 +150,12 @@ button.btn {
         margin: 1em 0;
     }
 
-    p:first-of-type {
+    p {
         font-style: oblique;
         margin: auto;
     }
 
-    span {
+    li {
         text-transform: capitalize;
         background-color: var(--vert);
         margin: .4em .8em .4em 0;
@@ -154,4 +166,17 @@ button.btn {
 
 #pageContent{
     padding: 1em;
+}
+
+h1{
+    position: relative;
+
+    // &::after{
+    //     position: absolute;
+    //     content: '';
+    //     background: red;
+    //     top: 0;
+    //     right: 0;
+    //     height: 100%;
+    // }
 }

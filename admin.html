@@ -6,8 +6,8 @@
     <title>Carte Leaflet - Administration</title>
     <link rel="stylesheet" href="./css/vendor/leaflet.css"/>
     <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/admin.css?365464654546">
-    <link rel="stylesheet" href="./css/responsive.css?6546545">
+    <link rel="stylesheet" href="./css/admin.css">
+    <link rel="stylesheet" href="./css/responsive.css">
 </head>
 <body>
 <main>
@@ -21,10 +21,10 @@
     </section>
 
     <section id="ajoutSalles">
-        <h1><?= (isset($modif)) ? "Modifier la salle" : "Ajouter une nouvelle salle" ?></h1>
+        <h1><?= (isset($modif)) ? "Modifier la salle" : "Ajouter une salle" ?></h1>
         <?php if(isset($message['posSalle'])) echo alerte($message['posSalle']); ?>
         <div id="mapAjout"></div>
-        <p>Cliquez sur la carte pour placer un marqueur, vous pouvez ensuite le déplacer à volonté.</p>
+        <p class="aide">Cliquez sur la carte pour placer un marqueur, vous pouvez ensuite le déplacer à volonté.</p>
         <form action="admin.php" method="POST">
             <label for="nomSalle"><?php if(isset($message['nomSalle'])) echo alerte($message['nomSalle']); ?>
                 <input type="text" name="nomSalle" id="nomSalle" placeholder="Nom de la salle"<?php if(isset($modif)) {
@@ -57,7 +57,11 @@
             } ?></textarea>
         </label>
         <label for="posSalle">
-            <input type="text" name="posSalle" id="posSalle" readonly data-lat="" data-lng="" placeholder="Coordonnées de la salle"<?php if(isset($modif)) echo " value=\"". $modif['posSalle'][1]. ",". $modif['posSalle'][0]. "\""; ?>>
+            <input type="text" name="posSalle" id="posSalle" readonly data-lat="" data-lng="" placeholder="Coordonnées de la salle"<?php if(isset($modif)) {
+                    echo " value=\"". $modif['posSalle'][1]. ",". $modif['posSalle'][0]. "\"";
+             }elseif(isset($_POST['posSalle'])){
+
+             } ?>>
         </label>
 <?php
 if (isset($modif)) :
@@ -83,10 +87,18 @@ endif;
 
 
 <?php
-if (isset($modif)) :
+if (isset($modif) || isset($_POST['posSalle'])) :
+    if (isset($modif)) {
+        $pos[0]=$modif['posSalle'][1];
+        $pos[1]=$modif['posSalle'][0];
+    }elseif(isset($_POST['posSalle'])){
+        $tmp = explode(",", sanitizeString($_POST['posSalle']));
+        $pos[0]=(float)$tmp[0];
+        $pos[1]=(float)$tmp[1];
+    }
 ?>
 <script>
-    let markerOldPos = [<?= $modif['posSalle'][1] ?>,<?= $modif['posSalle'][0] ?>];
+    let markerOldPos = [<?= $pos[0]. ",". $pos[1] ?>];
 </script>
 <?php
 endif;
