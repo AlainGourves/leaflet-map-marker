@@ -31,6 +31,7 @@ if (isset($_POST['submit'])) {
         $message['sportsSalle'] = "Saisir le(s) sport(s) pratiqué(s).";
     } elseif (empty($_POST['posSalle'])) {
         $message['posSalle'] = "Placer un marqueur sur la carte.";
+        unset($_POST['posSalle']);
     }else{
         $feature = new stdClass; // objet anonyme
         $properties = new stdClass; // objet anonyme

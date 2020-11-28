@@ -57,7 +57,6 @@ select {
 
 /* Remove all animations and transitions for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
-
     *,
     *::before,
     *::after {
@@ -74,7 +73,9 @@ select {
     --vert: hsl(160, 85%, 40%);
     --bleu: hsl(210, 90%, 40%);
     --bleuLight: hsl(210, 90%, 87%);
-    --orange: hsl(22, 85%, 50%);
+    --beige: hsl(30, 85%, 40%);
+    --beigeLight: hsl(30, 85%, 90%);
+    --orange: hsl(17, 85%, 50%);
 
     --shadow-85: rgba(0, 0, 0, .85);
     --shadow-50: rgba(0, 0, 0, .50);
@@ -93,23 +94,6 @@ main {
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
-}
-
-label {
-    display: block;
-}
-
-input:focus-visible{
-    box-shadow: 0 0 2px 2px hsla(204deg, 100%, 50%, .75);
-    outline-style: none;
-    outline: none;
-}
-// cf. https://css-tricks.com/the-focus-visible-trick/ 
-input:focus:not(:focus-visible) {
-    box-shadow: 0 0 2px 2px var(--vert);
-    outline-style: none;
-    outline: none;
-    // box-shadow: none;
 }
 
 #mapSalles {
@@ -166,17 +150,4 @@ button.btn {
 
 #pageContent{
     padding: 1em;
-}
-
-h1{
-    position: relative;
-
-    // &::after{
-    //     position: absolute;
-    //     content: '';
-    //     background: red;
-    //     top: 0;
-    //     right: 0;
-    //     height: 100%;
-    // }
 }

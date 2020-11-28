@@ -10,77 +10,41 @@
 
 #listeSalles,
 #ajoutSalles{
-    width: 100%;
+    width: clamp(320px, 100%, 500px);
     margin: 1em;
-    // margin-top: 1em;
-}
 
-#listeSalles{
-    order: 3;
-    // margin-left: auto;
+    h1{
+        position: relative;
+        text-transform: uppercase;
+        line-height: 1;
+    }
 }
 
 #ajoutSalles{
     order: 2;
     padding: 1em;
-    // margin: 2em auto 0 0;
-    background: hsl(30, 70%, 90%);
-    border: 1px solid hsl(30, 40%, 60%);
+    background: var(--beigeLight);
+    border: 1px solid var(--shadow-50);
     border-radius: .5em;
-}
 
-/* ---------------------------------------- FORM */
-input:placeholder-shown,
-textarea:placeholder-shown{
-    background-color: var(--shadow-25);
-}
+    h1{
+        color: var(--beige);
+    }
 
-#ajoutSalles input[type=text],
-#ajoutSalles textarea{
-    width: 100%;
-    margin-bottom: 1em;
-    // font-size: .75em;
-    border: 1px solid rgba(0,0,0,.5);
-    border-radius: .5em;
-    padding: .25em .5em;
-}
-
-.aide,
-#ajoutSalles input[type=text]::placeholder,
-#ajoutSalles textarea::placeholder{ font-style: oblique;
-    font-style: oblique;
-}
-
-#ajoutSalles textarea{
-    height: 5em;
-    line-height: 1.2;
-    resize: vertical;
-    overflow: auto;
-}
-
-#ajoutSalles input[type=submit]{
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    margin-left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--bleu);
-    border: 1px solid var(--bleu);
-}
-
-span.alerte{
-    color: var(--orange);
-    font-weight: 600;
-}
-
-#ajoutSalles input.alerte,
-#ajoutSalles textarea.alerte{
-    box-shadow: 0 0 2px 2px var(--orange);
+    #mapAjout {
+        width: 100%;
+        height: 250px;
+    }
 }
 
 #listeSalles {
+    order: 3;
+
+    h1{
+        color: var(--bleu);
+    }
+
     article{
-        // padding: 1em;
         margin-bottom: 1em;
         color: var(--bleu);
         background: var(--bleuLight);
@@ -115,14 +79,82 @@ span.alerte{
     li{
         background-color: var(--vert);
         text-transform: capitalize;
-        margin-right: .8em;
+        margin: 0 .8em .5em 0;
     }
 }
 
+/* ---------------------------------------- FORM */
+label {
+    display: block;
+}
 
-#ajoutSalles #mapAjout {
+input:focus-visible,
+input:-moz-focusring,
+textarea:focus-visible{
+    box-shadow: 0 0 3px 2px hsla(204deg, 100%, 50%, .75);
+    outline-style: none;
+    outline: none;
+}
+
+// cf. https://css-tricks.com/the-focus-visible-trick/ 
+input:focus:not(:focus-visible),
+input:focus:not(:-moz-focusring),
+textarea:focus:not(:focus-visible){
+    outline-style: none;
+    outline: none;
+}
+
+input:placeholder-shown,
+textarea:placeholder-shown{
+    background-color: var(--shadow-25);
+}
+
+#ajoutSalles input[type=text],
+#ajoutSalles textarea{
     width: 100%;
-    height: 250px;
+    margin-bottom: 1em;
+    border: 1px solid rgba(0,0,0,.5);
+    border-radius: .5em;
+    padding: .25em .5em;
+}
+
+.aide{
+    color: var(--beige);
+    font-style: oblique;
+}
+
+#ajoutSalles input[type=text]::placeholder,
+#ajoutSalles textarea::placeholder{
+    color: var(--beigeLight);
+    opacity: 1;
+    font-style: oblique;
+}
+
+#ajoutSalles textarea{
+    height: 5em;
+    line-height: 1.2;
+    resize: vertical;
+    overflow: auto;
+}
+
+#ajoutSalles input[type=submit]{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--bleu);
+    border: 1px solid var(--bleu);
+}
+
+span.alerte{
+    color: var(--orange);
+    font-weight: 600;
+}
+
+#ajoutSalles input.alerte,
+#ajoutSalles textarea.alerte{
+    box-shadow: 0 0 2px 2px var(--orange);
 }
 
 /* ------------------- Dialogue Confirmation */
@@ -150,7 +182,7 @@ span.alerte{
     box-shadow: 0px 2px 8px var(--shadow-50);
     
     .btn{
-        margin: .5em;
+        margin: .625em;
         padding: 8px 12px;
         text-transform: uppercase;
         background-color: var(--bleu);

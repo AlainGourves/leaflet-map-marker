@@ -2,8 +2,24 @@
 @media (min-width: 768px) {
     #listeSalles,
     #ajoutSalles{
-        width: calc(50% - 2em);
+        width: calc(45% - 2em);
         max-width: 500px;
+        position: relative;
+
+        h1{
+            position: absolute;
+            top: 0;
+            left: -1.25em;
+            height: 100%;
+            width: auto;
+            display: grid;
+            align-content: flex-end;
+            writing-mode: vertical-lr;
+            transform: rotate(-180deg);
+            text-align: right;
+            font-size: 2em;
+            line-height: inherit;
+        }
     }
 
     #listeSalles{
@@ -12,9 +28,10 @@
 
     #ajoutSalles{
         order: 3;
+        margin-left: 2.5em;
     }
 
     #dialogueSalle .btn{
-        padding: 4px 6px;
+        padding: 6px 8px;
     }
 }
