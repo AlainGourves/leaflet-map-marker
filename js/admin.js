@@ -49,8 +49,7 @@ function zoomTo(map, pos){
 }
 
 function onMapLoad(){
-    if(typeof markerOldPos !== 'undefined'){
-        // cas d'une modif
+    if(typeof markerOldPos !== 'undefined'){ // cas d'une modif
         marker.setLatLng(markerOldPos);
         position(L.latLng(markerOldPos));
         zoomTo(myMap, markerOldPos);
@@ -107,16 +106,13 @@ window.addEventListener("load", e => {
     getData(url);
 
     // Ajout de salles
-    myMap = L.map("mapAjout", {
-        center: [48.087, -1.66],
-        minZoom: 4,
-        zoom: 15
-    });
+    myMap = L.map("mapAjout", { minZoom: 4 });
+    marker = L.marker([0,0], { draggable: true, title: "Cliquer-glisser pour déplacer le marqueur."}).addTo(myMap);
+    myMap.on('load', onMapLoad); // doit être placé avant setView sinon ça ne marche pas
+    myMap.setView([48.087, -1.66], 15);
+
     L.tileLayer(tileUrl, { attribution }).addTo(myMap);
 
-    marker = L.marker([0,0], { draggable: true, title: "Cliquer-glisser pour déplacer le marqueur."}).addTo(myMap);
-
-    myMap.on('load', onMapLoad);
 
     myMap.on('click', function(e){
         let pos = e.latlng;
@@ -126,12 +122,12 @@ window.addEventListener("load", e => {
         getAddress(pos);
     });
 
-    myMap.on('zoomend', function(e){
-        let pos = marker.getLatLng();
-        if (pos.lat !== 0 && pos.lng !==0){
-            this.setView((pos))
-        }
-    });
+    // myMap.on('zoomend', function(e){
+    //     let pos = marker.getLatLng();
+    //     if (pos.lat !== 0 && pos.lng !==0){
+    //         this.setView((pos))
+    //     }
+    // });
 
     L.DomEvent.on(marker, 'dragend', () => {
         pos = marker.getLatLng();
